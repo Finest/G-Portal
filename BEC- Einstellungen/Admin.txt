@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<BEAdmins>
+
+
+
+<admin id="0">
+<name>NAME DES HAUPADMINS</name>
+<guid>860fa691fdcf1b96e9b0faf652938adb</guid>
+<group>0</group>
+<groupname>Server Owner</groupname>
+</admin>
+
+<admin id="1">
+<name>NAME DES CO-ADMINS</name>
+<guid>e305baa42ca62a97c573155c905cba95</guid>
+<group>1</group>
+<groupname>CoAdmin</groupname>
+</admin>
+
+
+<admin id="2">
+<name>NAME DES MODERATORS</name>
+<guid>dd1c9bee599ce3c5bcf6fdcf766816d6 </guid>
+<group>1</group>
+<groupname>Moderator</groupname>
+</admin>
+
+</BEAdmins> 
