@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-![DayZ Logo](https://www.dropbox.com/s/edyoq13rfi0q4vm/logo.png)
-=======
-![DayZ Logo](http://www.g-portal.de/fileadmin/gp/img/logo.png)
->>>>>>> Readme Fix
+
+![DayZ Logo](http://dayzforum.net/logogportal.png)
+
 
 G-Portal (G-Portal.de)
 ==========
