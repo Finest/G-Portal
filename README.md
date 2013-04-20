@@ -12,7 +12,7 @@ Current Version
     <td>Version</td><td>Mod Folders</td><td>Download</td>
   </tr>
   <tr>
-    <td>1.1</td><td>@DayZOvaron</td><td>https://www.dropbox.com/home/G-Portal</td>
+    <td>1.0</td><td>All FOlders</td><td>https://www.dropbox.com/home/G-Portal</td>
   </tr>
 </table>
 G-Portal Forum: 
