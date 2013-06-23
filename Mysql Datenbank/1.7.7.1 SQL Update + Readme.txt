@@ -1,0 +1,23 @@
+1. Wichtige / Infos / Daten
+
+2. Phpmyadmin: Login mit Ihren Zugansdaten
+
+3. klicken sie auf die Datenbank _cher für Chernarus
+
+4. oben Struktur SQL Suche Tracking und klicken auf SQL.
+
+5. fügen Sie folgenden Text dort ein
+insert into deployable (class_name) values ('StashSmall');
+insert into deployable (class_name) values ('StashMedium');
+
+6. klicken auf OK für ausführen nun müssten Sie folgende Meldung bekommen
+
+Ihr SQL-Befehl wurde erfolgreich ausgeführt.
+INSERT INTO deployable( class_name )
+VALUES (
+'StashSmall'
+);# 1 Zeile(n) betroffen.
+INSERT INTO deployable( class_name )
+VALUES (
+'StashMedium'
+);# 1 Zeile(n) betroffen. 
