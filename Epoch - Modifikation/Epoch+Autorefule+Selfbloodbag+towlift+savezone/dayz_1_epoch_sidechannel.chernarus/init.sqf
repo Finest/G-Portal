@@ -34,7 +34,7 @@ _logistic = execVM "=BTC=_Logistic\=BTC=_Logistic_Init.sqf";
 
 dayz_paraSpawn = false;
 
-dayz_minpos = 0; 
+dayz_minpos = -1; 
 dayz_maxpos = 16000;
 
 dayz_sellDistance_vehicle = 10;
