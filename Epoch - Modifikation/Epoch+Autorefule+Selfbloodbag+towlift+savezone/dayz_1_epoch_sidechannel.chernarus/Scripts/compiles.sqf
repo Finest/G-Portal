@@ -111,6 +111,7 @@ if (!isDedicated) then {
 	player_antiWall =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_antiWall.sqf";
 	player_deathBoard =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\list_playerDeathsAlt.sqf";
 	
+	player_plotPreview = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\object_showPlotRadius.sqf";
 	player_upgradeVehicle =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_upgradeVehicle.sqf";
 	
 	//ui
@@ -127,8 +128,56 @@ if (!isDedicated) then {
 	onPreloadStarted 			"dayz_preloadFinished = false;";
 	onPreloadFinished 			"dayz_preloadFinished = true;";
 	
+	// helper functions
+	player_hasTools =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_hasTools.sqf";
+	player_checkItems =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_checkItems.sqf";
+	player_removeItems =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_removeItems.sqf";
+	// combination of check and remove items
+	player_checkAndRemoveItems = {
+		private ["_items","_b"];
+		_items = _this;
+		_b = _items call player_checkItems;
+		if (_b) then {
+			_b = _items call player_removeItems;
+		};
+		_b
+	};
+	
 
-	 
+	epoch_totalCurrency = {
+		// total currency
+		_total_currency = 0;
+		{
+			_part =  (configFile >> "CfgMagazines" >> _x);
+			_worth =  (_part >> "worth");
+			if isNumber (_worth) then {
+				_total_currency = _total_currency + getNumber(_worth);
+			};
+		} forEach (magazines player);
+		_total_currency
+	};
+
+	epoch_itemCost = {
+		_trade_total = 0;
+		{			
+			_part_in_configClass =  configFile >> "CfgMagazines" >> (_x select 0);
+			if (isClass (_part_in_configClass)) then {
+				_part_inWorth = (_part_in_configClass >> "worth");
+				if isNumber (_part_inWorth) then {
+					_trade_total = _trade_total + (getNumber(_part_inWorth) * (_x select 1));
+				};
+			};
+		} forEach _this;
+		
+		diag_log format["DEBUG TRADER ITEMCOST: %1", _this];
+		_trade_total
+	};
+
+	epoch_returnChange =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\epoch_returnChange.sqf";
+	// usage [["partinclassname",4]] call epoch_returnChange;
+	
+
+
 
 	//
 	RunTime = 0;
@@ -238,7 +287,7 @@ if (!isDedicated) then {
 	};
 
 	player_tagFriendlyMsg = {
-		if(player == _this) then { 
+		if(player == (_this select 0)) then { 
 			cutText[(localize "str_epoch_player_2"),"PLAIN DOWN"];
 		}; 
 	};
@@ -501,6 +550,28 @@ if (!isDedicated) then {
 	dayz_HungerThirst = {
 		dayz_hunger = dayz_hunger + (_this select 0);
 		dayz_thirst = dayz_thirst + (_this select 1);
+	};
+	
+	// better item counting by maca134 - https://github.com/vbawol/DayZ-Epoch/issues/916
+	MC_item_spaces = {
+        private ["_unit", "_item", "_slotsEmpty", "_slotsItem", "_slotsAfterAdd", "_c", "_space"];
+        _unit = _this select 0;
+        _item = _this select 1;
+
+        _slotsEmpty = [_unit] call BIS_fnc_invSlotsEmpty;
+        _slotsItem = [_item] call BIS_fnc_invSlotType;
+        if ((typeName _unit) != "OBJECT") exitWith {textLogFormat ["INV_ Error: BIS_FNC_invAdd - 1st parameter must be unit! %1", _this];false};
+        if (((typeName _item) != "CONFIG") && ((typeName _item) != "STRING")) exitWith {textLogFormat ["INV_ Error: BIS_FNC_invAdd - 2nd parameter must be config|string|array of (config|string)! %1", _this];false};
+        if (isNil {_item})  exitWith {textLogFormat ["INV_ Error: BIS_FNC_invAdd - 2nd parameter - _item is undefined! %1", _this];false};
+        _c = 0;
+        _space = 0;
+        {
+                if (_x > 0) exitWith {
+                        _space = floor((_slotsEmpty select _c) / _x);
+                };
+                _c = _c + 1;
+        } forEach _slotsItem;
+        _space
 	};
 
 	dayz_EjectPlayer = {

@@ -148,6 +148,3 @@ class DayZ_loadingScreen
 		};
 	};
 };
-
-#include "=BTC=_Logistic\=BTC=_Lift\=BTC=_Hud.h"
-#include "R3F_ARTY_AND_LOG\desc_include.h"

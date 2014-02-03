@@ -1,5 +1,3 @@
-
-
 /*	
 	For DayZ Epoch
 	Addons Credits: Jetski Yanahui by Kol9yN, Zakat, Gerasimow9, YuraPetrov, zGuba, A.Karagod, IceBreakr, Sahbazz
@@ -24,13 +22,11 @@ enableSentences false;
 // DayZ Epoch config
 spawnShoremode = 1; // Default = 1 (on shore)
 spawnArea= 1500; // Default = 1500
-MaxHeliCrashes= 5; // Default = 5
+
 MaxVehicleLimit = 300; // Default = 50
 MaxDynamicDebris = 500; // Default = 100
 dayz_MapArea = 14000; // Default = 10000
 dayz_maxLocalZombies = 30; // Default = 30 
-
-_logistic = execVM "=BTC=_Logistic\=BTC=_Logistic_Init.sqf";
 
 dayz_paraSpawn = false;
 
@@ -41,13 +37,15 @@ dayz_sellDistance_vehicle = 10;
 dayz_sellDistance_boat = 30;
 dayz_sellDistance_air = 40;
 
-dayz_maxAnimals = 16; // Default: 8
+dayz_maxAnimals = 5; // Default: 8
 dayz_tameDogs = true;
 DynamicVehicleDamageLow = 0; // Default: 0
 DynamicVehicleDamageHigh = 100; // Default: 100
 
+DZE_BuildOnRoads = true; // Default: False
+
 EpochEvents = [["any","any","any","any",30,"crash_spawner"],["any","any","any","any",0,"crash_spawner"],["any","any","any","any",15,"supply_drop"]];
-dayz_fullMoonNights = false;
+dayz_fullMoonNights = true;
 
 //Load in compiled functions
 call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\variables.sqf";				//Initilize the Variables (IMPORTANT: Must happen very early)
@@ -86,25 +84,19 @@ if (!isDedicated) then {
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
 	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
 	
-	// Anti Hack 
-	if (true) then {
-		[] execVM "\z\addons\dayz_code\system\antihack.sqf";
-	};
-	
+	//anti Hack
+	[] execVM "\z\addons\dayz_code\system\antihack.sqf";
+
 	//Lights
-	if (true) then {
-		[0,0,true,true,true,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
-	};
+	//[0,0,true,true,true,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
+	
 };
 
-if(true) then {
-	#include "\z\addons\dayz_code\system\REsec.sqf"
-};
+#include "\z\addons\dayz_code\system\REsec.sqf"
 
 //Start Dynamic Weather
-if(true) then {
-	execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
-};
+execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
+
 
 #include "\z\addons\dayz_code\system\BIS_Effects\init.sqf"
 
