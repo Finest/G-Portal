@@ -28,6 +28,8 @@ MaxDynamicDebris = 500; // Default = 100
 dayz_MapArea = 14000; // Default = 10000
 dayz_maxLocalZombies = 30; // Default = 30 
 
+_logistic = execVM "=BTC=_Logistic\=BTC=_Logistic_Init.sqf";
+
 dayz_paraSpawn = false;
 
 dayz_minpos = -1; 
