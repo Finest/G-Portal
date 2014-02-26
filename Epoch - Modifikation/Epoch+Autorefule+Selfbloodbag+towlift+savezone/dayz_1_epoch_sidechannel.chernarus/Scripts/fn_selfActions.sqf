@@ -1,4 +1,3 @@
-
 scriptName "Functions\misc\fn_selfActions.sqf";
 /***********************************************************
 	ADD ACTIONS FOR SELF
@@ -668,7 +667,7 @@ if (!isNull cursorTarget and !_inVehicle and !_isPZombie and (player distance cu
 	};
 
 	// inplace maintenance tool
-	if((_cursorTarget isKindOf "ModularItems" or _cursorTarget isKindOf "DZE_Housebase" or _typeOfCursorTarget in DZE_ExtraMaintain) and (damage _cursorTarget >= 0.1)) then {
+	if((_cursorTarget isKindOf "ModularItems" or _cursorTarget isKindOf "DZE_Housebase" or _typeOfCursorTarget == "LightPole_DZ") and (damage _cursorTarget >= DZE_DamageBeforeMaint)) then {
 		if ((s_player_lastTarget select 2) != _cursorTarget) then {
 			if (s_player_maint_build > 0) then {	
 				player removeAction s_player_maint_build;
@@ -786,13 +785,9 @@ if (!isNull cursorTarget and !_inVehicle and !_isPZombie and (player distance cu
 					s_player_parts set [count s_player_parts,_buy];
 				
 				} forEach (_traderMenu select 1);
-				// Database menu 
-				_buy = player addAction [localize "STR_EPOCH_PLAYER_289", "\z\addons\dayz_code\actions\show_dialog.sqf",(_traderMenu select 0), 99, true, false, "",""];
+				// Database menu
+				_buy = player addAction [localize "STR_EPOCH_PLAYER_289", "\z\addons\dayz_code\actions\show_dialog.sqf",(_traderMenu select 0), 999, true, false, "",""];
 				s_player_parts set [count s_player_parts,_buy];
-				
-				// Add static metals trader options under sub menu
-				_metals_trader = player addAction [localize "STR_EPOCH_PLAYER_301", "\z\addons\dayz_code\actions\trade_metals.sqf",["na"], 0, true, false, "",""];
-				s_player_parts set [count s_player_parts,_metals_trader];
 
 			};
 			s_player_parts_crtl = 1;

@@ -44,7 +44,7 @@ dayz_tameDogs = true;
 DynamicVehicleDamageLow = 0; // Default: 0
 DynamicVehicleDamageHigh = 100; // Default: 100
 
-DZE_BuildOnRoads = true; // Default: False
+DZE_BuildOnRoads = false; // Default: False
 
 EpochEvents = [["any","any","any","any",30,"crash_spawner"],["any","any","any","any",0,"crash_spawner"],["any","any","any","any",15,"supply_drop"]];
 dayz_fullMoonNights = true;
@@ -90,7 +90,7 @@ if (!isDedicated) then {
 	[] execVM "\z\addons\dayz_code\system\antihack.sqf";
 
 	//Lights
-	//[0,0,true,true,true,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
+	//[false,12] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
 	
 };
 
